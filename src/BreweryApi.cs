@@ -20,5 +20,10 @@ namespace Saison
         {
             return _serviceClient.SearchBrewery(q).Response;
         }
+
+        public object Info(int breweryId)
+        {
+            return _serviceClient.BreweryInfo(breweryId);
+        }
     }
 }

@@ -183,5 +183,10 @@ namespace Saison
             var result = Execute<UntappdBasicResponse<BrewerySearchResponse>, BrewerySearchResponse>(request);
             return result;
         }
+
+        public object BreweryInfo(int breweryId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
