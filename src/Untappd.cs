@@ -3,6 +3,7 @@ namespace Saison
     public class Untappd
     {
         public BeerApi Beer { get; set; }
+        public BreweryApi Brewery { get; set; }
         public VenueApi Venue { get; set; }
         public WishlistApi Wishlist { get; set; }
         public ThePubApi ThePub { get; set; }
@@ -17,6 +18,7 @@ namespace Saison
             Venue = new VenueApi();
             Wishlist = new WishlistApi();
             ThePub = new ThePubApi();
+            Brewery = new BreweryApi();
         }
     }
 }

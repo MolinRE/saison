@@ -54,6 +54,42 @@ namespace Saison
             return response.Data;
         }
 
+
+        private T Execute<T, T2>(RestRequest request)
+            where T : UntappdBasicResponse<T2>, new() 
+            where T2 : new()
+        {
+            if (request.Method == Method.POST)
+            {
+                if (request.Body.Value is IAuthentificationRequired body)
+                {
+                    body.AccessToken = Config.AccessToken;
+                    request.AddJsonBody(body);
+                }
+            }
+            
+            request.AddQueryParameter("client_id", Config.ClientId);
+            request.AddQueryParameter("client_secret", Config.ClientSecret);
+            request.AddHeader("User-Agent", $"JoyTapBot ({Config.ClientId})/0.1");
+            
+            var response = _client.Execute<T>(request);
+            if (response.Data == null)
+            {
+                var basicResponse = JsonSerializer.Deserialize<UntappdBasicResponse>(response.Content);
+                if (basicResponse != null)
+                {
+                    var result = new T();
+                    result.Meta = basicResponse.Meta;
+                    return result;
+                }
+                if (response.ErrorException != null)
+                {
+                    throw new Exception("Ошибка при обработке ответа API Untappd", response.ErrorException);
+                }
+            }
+            return response.Data;
+        }
+        
         public Beers SearchBeer(string q, int? offset = null, int? limit = null, string sort = null)
         {
             var request = new RestRequest("search/beer", Method.GET, DataFormat.Json);
@@ -136,6 +172,15 @@ namespace Saison
             request.AddQueryParameter("dist_pref", distancePreference == DistancePreference.Miles ? "m" : "km");
 
             var result = Execute<ThePubResponseContainer>(request);
+            return result;
+        }
+
+        public UntappdBasicResponse<BrewerySearchResponse> SearchBrewery(string q)
+        {
+            var request = new RestRequest("search/brewery", Method.GET, DataFormat.Json);
+            request.AddQueryParameter("q", q);
+
+            var result = Execute<UntappdBasicResponse<BrewerySearchResponse>, BrewerySearchResponse>(request);
             return result;
         }
     }

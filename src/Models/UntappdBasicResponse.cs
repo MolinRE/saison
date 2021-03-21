@@ -12,6 +12,17 @@ namespace Saison.Models
         public List<object> Notifications { get; set; } 
     }
 
+    public class UntappdBasicResponse<T> where T : new()
+    {
+        [JsonPropertyName("meta")]
+        public Meta Meta { get; set; } 
+
+        [JsonPropertyName("notifications")]
+        public List<object> Notifications { get; set; }
+
+        public T Response { get; set; }
+    }
+
     public class Meta
     {
         [JsonPropertyName("code")]
