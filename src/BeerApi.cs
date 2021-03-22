@@ -1,5 +1,6 @@
 ﻿using System;
 using Saison.Models;
+using Saison.Models.Beer;
 
 namespace Saison
 {
@@ -12,13 +13,13 @@ namespace Saison
             _client = new ServiceClient();
         }
         
-        public Beers Search(string q)
+        public object Search(string q)
         {
             var result = _client.SearchBeer(q);
             return result;
         }
         
-        public BeerInfoFull Info(int bid)
+        public BeerInfo Info(int bid)
         {
             var result = _client.BeerInfo(bid);
             return result;

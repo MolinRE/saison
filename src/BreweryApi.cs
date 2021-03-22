@@ -1,4 +1,4 @@
-using Saison.Models;
+using Saison.Models.Brewery;
 
 namespace Saison
 {
@@ -16,14 +16,19 @@ namespace Saison
         /// </summary>
         /// <param name="q">The search term that you want to search.</param>
         /// <returns></returns>
-        public BrewerySearchResponse Search(string q)
+        public SearchResponse Search(string q)
         {
             return _serviceClient.SearchBrewery(q).Response;
         }
 
-        public object Info(int breweryId)
+        /// <summary>
+        /// This method will allow you to see extended information about a brewery.
+        /// </summary>
+        /// <param name="breweryId">The Brewery ID that you want to display checkins</param>
+        /// <returns></returns>
+        public BreweryInfoFull Info(int breweryId)
         {
-            return _serviceClient.BreweryInfo(breweryId);
+            return _serviceClient.BreweryInfo(breweryId).Response;
         }
     }
 }

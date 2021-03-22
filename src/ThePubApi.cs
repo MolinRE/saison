@@ -11,7 +11,7 @@ namespace Saison
             _serviceClient = new ServiceClient();
         }
         
-        public ThePubResponse Local(float latitude, float longitude, int? maxId = null, int? minId = null, 
+        public ThePub Local(float latitude, float longitude, int? maxId = null, int? minId = null, 
             int limit = 25, int radius = 25, DistancePreference distancePreference = DistancePreference.Miles)
         {
             var result = _serviceClient.ThePubLocal(latitude, longitude, maxId, minId, limit, radius, 

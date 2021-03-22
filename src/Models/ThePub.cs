@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Saison.Models.Activity;
 
 namespace Saison.Models
 {
-    public class ThePubResponse
+    public class ThePub
     {
         [JsonPropertyName("limit")]
         public int Limit { get; set; }
@@ -25,11 +26,5 @@ namespace Saison.Models
 
         [JsonPropertyName("checkins")]
         public Checkins Checkins { get; set; }
-    }
-
-    public class ThePubResponseContainer : UntappdBasicResponse
-    {
-        [JsonPropertyName("response")]
-        public ThePubResponse Response { get; set; }
     }
 }

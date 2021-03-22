@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Saison.Models.Activity;
 
 namespace Saison.Models.Brewery
 {
@@ -15,43 +16,40 @@ namespace Saison.Models.Brewery
 
         [JsonPropertyName("brewery_page_url")]
         public string BreweryPageUrl { get; set; }
-
-        [JsonPropertyName("brewery_type")]
-        public string BreweryType { get; set; }
-
+        
         [JsonPropertyName("brewery_label")]
         public string BreweryLabel { get; set; }
-
+        
+        [JsonPropertyName("brewery_label_hd")]
+        public string BreweryLabelHd { get; set; }
+        
         [JsonPropertyName("country_name")]
         public string CountryName { get; set; }
 
-        [JsonPropertyName("contact")]
-        public Contact Contact { get; set; }
-
-        [JsonPropertyName("location")]
-        public Location Location { get; set; }
-
-        [JsonPropertyName("brewery_active")]
-        public int BreweryActive { get; set; }
-
-        [JsonPropertyName("brewery_label_hd")]
-        public string BreweryLabelHd { get; set; }
-
         [JsonPropertyName("brewery_in_production")]
         public int BreweryInProduction { get; set; }
-
+        
         [JsonPropertyName("is_independent")]
         public int IsIndependent { get; set; }
 
         [JsonPropertyName("claimed_status")]
         public ClaimedStatus ClaimedStatus { get; set; }
-
+        
         [JsonPropertyName("beer_count")]
         public int BeerCount { get; set; }
+
+        [JsonPropertyName("contact")]
+        public Contact Contact { get; set; }
+
+        [JsonPropertyName("brewery_type")]
+        public string BreweryType { get; set; }
 
         [JsonPropertyName("brewery_type_id")]
         public int BreweryTypeId { get; set; }
 
+        [JsonPropertyName("location")]
+        public Location Location { get; set; }
+        
         [JsonPropertyName("rating")]
         public Rating Rating { get; set; }
 
@@ -60,12 +58,12 @@ namespace Saison.Models.Brewery
 
         [JsonPropertyName("stats")]
         public Stats Stats { get; set; }
-
+        
         [JsonPropertyName("owners")]
         public Owners Owners { get; set; }
 
         [JsonPropertyName("media")]
-        public Media Media { get; set; }
+        public MediaCollection Media { get; set; }
 
         [JsonPropertyName("checkins")]
         public Checkins Checkins { get; set; }
@@ -74,6 +72,6 @@ namespace Saison.Models.Brewery
         public BeerList BeerList { get; set; }
 
         [JsonPropertyName("locations")]
-        public Locations Locations { get; set; }
+        public Location Locations { get; set; }
     }
 }

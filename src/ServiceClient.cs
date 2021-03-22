@@ -175,18 +175,22 @@ namespace Saison
             return result;
         }
 
-        public UntappdBasicResponse<BrewerySearchResponse> SearchBrewery(string q)
+        public UntappdBasicResponse<Models.Brewery.SearchResponse> SearchBrewery(string q)
         {
             var request = new RestRequest("search/brewery", Method.GET, DataFormat.Json);
             request.AddQueryParameter("q", q);
 
-            var result = Execute<UntappdBasicResponse<BrewerySearchResponse>, BrewerySearchResponse>(request);
+            var result = Execute<UntappdBasicResponse<Models.Brewery.SearchResponse>, Models.Brewery.SearchResponse>(request);
             return result;
         }
 
-        public object BreweryInfo(int breweryId)
+        public UntappdBasicResponse<Models.Brewery.BreweryInfoFull> BreweryInfo(int breweryId)
         {
-            throw new NotImplementedException();
+            var request = new RestRequest($"brewery/info/{breweryId}", Method.GET, DataFormat.Json);
+            request.AddQueryParameter("compact", false.ToString());
+
+            var result = Execute<UntappdBasicResponse<Models.Brewery.BreweryInfoFull>, Models.Brewery.BreweryInfoFull>(request);
+            return result;
         }
     }
 }
