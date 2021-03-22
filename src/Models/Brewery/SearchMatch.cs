@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace Saison.Models
+namespace Saison.Models.Brewery
 {
-    public class BrewerySearchMatch
+    public class SearchMatch
     {
         [JsonPropertyName("brewery_id")]
         public int Id { get; set; }

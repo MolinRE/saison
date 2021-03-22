@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Saison.Models
+namespace Saison.Models.Brewery
 {
-    public class BrewerySearch
+    public class Owners
     {
         [JsonPropertyName("count")]
         public int Count { get; set; }
         
         [JsonPropertyName("items")]
-        public List<BrewerySearchItem> Items { get; set; }
+        public List<object> Items { get; set; }
     }
 }

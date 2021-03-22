@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Saison.Models
+namespace Saison.Models.Brewery
 {
     public class BreweryInfoFull
     {
@@ -74,24 +74,6 @@ namespace Saison.Models
         public BeerList BeerList { get; set; }
 
         [JsonPropertyName("locations")]
-        public BreweryLocations Locations { get; set; }
-    }
-
-    public class BreweryLocations
-    {
-        
-    }
-
-    public class BreweryOwners
-    {
-        
-    }
-    
-    public class BreweryStats
-    {}
-
-    public class BreweryRating
-    {
-        
+        public Locations Locations { get; set; }
     }
 }

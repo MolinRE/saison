@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace Saison.Models
+namespace Saison.Models.Brewery
 {
-    public class BreweryBeer
+    public class Beer
     {
         [JsonPropertyName("bid")]
         public int Bid { get; set; }

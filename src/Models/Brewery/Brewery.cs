@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Saison.Models
+namespace Saison.Models.Brewery
 {
     public class Brewery
     {

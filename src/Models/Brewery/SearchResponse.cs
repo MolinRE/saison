@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace Saison.Models
+namespace Saison.Models.Brewery
 {
-    public class BrewerySearchResponse
+    public class SearchResponse
     {
         [JsonPropertyName("engine")]
         public string Engine { get; set; }
@@ -26,6 +26,6 @@ namespace Saison.Models
         public int Found { get; set; }
 
         [JsonPropertyName("brewery")]
-        public BrewerySearch Result { get; set; }
+        public Search Result { get; set; }
     }
 }
