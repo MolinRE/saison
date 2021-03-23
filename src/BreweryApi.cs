@@ -1,4 +1,5 @@
 using Saison.Models.Brewery;
+using Saison.Models.Untappd;
 
 namespace Saison
 {
@@ -16,7 +17,7 @@ namespace Saison
         /// </summary>
         /// <param name="q">The search term that you want to search.</param>
         /// <returns></returns>
-        public SearchResponse Search(string q)
+        public ResponseContainer<SearchResponse> Search(string q)
         {
             return _serviceClient.SearchBrewery(q);
         }
@@ -26,7 +27,7 @@ namespace Saison
         /// </summary>
         /// <param name="breweryId">The Brewery ID that you want to display checkins</param>
         /// <returns></returns>
-        public BreweryInfo Info(int breweryId)
+        public ResponseContainer<BreweryInfo> Info(int breweryId)
         {
             return _serviceClient.BreweryInfo(breweryId);
         }

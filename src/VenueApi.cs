@@ -1,5 +1,6 @@
 using System.Linq;
 using Saison.Models;
+using Saison.Models.Untappd;
 using Saison.Models.Venue;
 
 namespace Saison
@@ -13,24 +14,14 @@ namespace Saison
             _client = new ServiceClient();
         }
 
-        public VenueLookupItem FoursquareLookup(string foursquareVenueId)
+        public ResponseContainer<FoursquareLookup> FoursquareLookup(string foursquareVenueId)
         {
-            var result = _client.VenueFoursqaureLookup(foursquareVenueId);
-            if (result.Meta.Code == 500)
-            {
-                if (result.Meta.ErrorDetail.Contains("There is no Untappd venue match"))
-                {
-                    return null;
-                }
-            }
-            
-            return result.Response.Venue.Items.FirstOrDefault();
+            return _client.VenueFoursqaureLookup(foursquareVenueId);
         }
 
-        public VenueInfo Info(int venueId)
+        public ResponseContainer<VenueInfo> Info(int venueId)
         {
-            var result = _client.VenueInfo(venueId);
-            return result;
+            return _client.VenueInfo(venueId);
         }
     }
 }

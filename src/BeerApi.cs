@@ -2,6 +2,7 @@
 using Saison.Models;
 using Saison.Models.Activity;
 using Saison.Models.Beer;
+using Saison.Models.Untappd;
 
 namespace Saison
 {
@@ -20,16 +21,14 @@ namespace Saison
             return result;
         }
         
-        public BeerInfo Info(int bid)
+        public ResponseContainer<BeerInfo> Info(int bid)
         {
-            var result = _client.BeerInfo(bid);
-            return result;
+            return _client.BeerInfo(bid);
         }
 
-        public BeerActivity Checkins(int bid)
+        public ResponseContainer<BeerActivity> Checkins(int bid)
         {
-            var result = _client.BeerCheckins(bid);
-            return result;
+            return _client.BeerCheckins(bid);
         }
     }
 }

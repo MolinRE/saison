@@ -95,25 +95,24 @@ namespace Saison
             return response.Data;
         }
         
-        public Search SearchBeer(string q, int? offset = null, int? limit = null, string sort = null)
+        public ResponseContainer<BeerSearchResponse> SearchBeer(string q, int? offset = null, int? limit = null, string sort = null)
         {
             var request = new RestRequest("search/beer", Method.GET, DataFormat.Json);
             request.AddQueryParameter("q", q);
 
-            var result = Execute<ResponseContainer<BeerSearchResponse>>(request);
-            return result.Response.Beers;
+            return Execute<ResponseContainer<BeerSearchResponse>>(request);
         }
 
-        public BeerInfo BeerInfo(int bid, bool compact = false)
+        public ResponseContainer<BeerInfo> BeerInfo(int bid, bool compact = false)
         {
             var request = new RestRequest($"beer/info/{bid}", Method.GET, DataFormat.Json);
             request.AddQueryParameter("compact", compact.ToString());
 
-            var result = Execute<ResponseContainer<BeerInfo>>(request);
-            return result.Response;
+            return Execute<ResponseContainer<BeerInfo>>(request);
         }
         
-        public BeerActivity BeerCheckins(int bid, int limit = 25, int? maxId = null, int? minId = null)
+        public ResponseContainer<BeerActivity> BeerCheckins(int bid, int limit = 25, int? maxId = null, 
+            int? minId = null)
         {
             var request = new RestRequest($"beer/checkins/{bid}", Method.GET, DataFormat.Json);
             request.AddQueryParameter("limit", limit.ToString());
@@ -127,24 +126,21 @@ namespace Saison
                 request.AddQueryParameter("min_id", minId.ToString());
             }
 
-            var result = Execute<ResponseContainer<BeerActivity>>(request);
-            return result.Response;
+            return Execute<ResponseContainer<BeerActivity>>(request);
         }
 
         public ResponseContainer<FoursquareLookup> VenueFoursqaureLookup(string venueId)
         {
             var request = new RestRequest($"venue/foursquare_lookup/{venueId}", Method.GET, DataFormat.Json);
 
-            var result = Execute<ResponseContainer<FoursquareLookup>>(request);
-            return result;
+            return Execute<ResponseContainer<FoursquareLookup>>(request);
         }
 
-        public VenueInfo VenueInfo(int venueId)
+        public ResponseContainer<VenueInfo> VenueInfo(int venueId)
         {
             var request = new RestRequest($"venue/info/{venueId}", Method.GET, DataFormat.Json);
 
-            var result = Execute<ResponseContainer<VenueInfo>>(request);
-            return result.Response;
+            return Execute<ResponseContainer<VenueInfo>>(request);
         }
 
         public WishlistAddContainer WishlistAdd(int bid)
@@ -152,11 +148,10 @@ namespace Saison
             var request = new RestRequest("user/wishlist/add", Method.POST, DataFormat.Json);
             request.AddJsonBody(new WishlistAddRequest(bid));
 
-            var result = Execute<WishlistAddContainer>(request);
-            return result;
+            return Execute<WishlistAddContainer>(request);
         }
 
-        public ThePub ThePubLocal(float latitude, float longitude, int? maxId = null, int? minId = null, 
+        public ResponseContainer<ThePub> ThePubLocal(float latitude, float longitude, int? maxId = null, int? minId = null, 
             int limit = 25, int radius = 25, DistancePreference distancePreference = DistancePreference.Miles)
         {
             var request = new RestRequest("thepub/local", Method.GET, DataFormat.Json);
@@ -176,26 +171,23 @@ namespace Saison
             request.AddQueryParameter("radius", radius.ToString());
             request.AddQueryParameter("dist_pref", distancePreference == DistancePreference.Miles ? "m" : "km");
 
-            var result = Execute<ResponseContainer<ThePub>>(request);
-            return result.Response;
+            return Execute<ResponseContainer<ThePub>>(request);
         }
 
-        public Models.Brewery.SearchResponse SearchBrewery(string q)
+        public ResponseContainer<Models.Brewery.SearchResponse> SearchBrewery(string q)
         {
             var request = new RestRequest("search/brewery", Method.GET, DataFormat.Json);
             request.AddQueryParameter("q", q);
-
-            var result = Execute<ResponseContainer<Models.Brewery.SearchResponse>>(request);
-            return result.Response;
+            
+            return Execute<ResponseContainer<Models.Brewery.SearchResponse>>(request);
         }
 
-        public Models.Brewery.BreweryInfo BreweryInfo(int breweryId)
+        public ResponseContainer<Models.Brewery.BreweryInfo> BreweryInfo(int breweryId)
         {
             var request = new RestRequest($"brewery/info/{breweryId}", Method.GET, DataFormat.Json);
             request.AddQueryParameter("compact", false.ToString());
 
-            var result = Execute<ResponseContainer<Models.Brewery.BreweryInfo>>(request);
-            return result.Response;
+            return Execute<ResponseContainer<Models.Brewery.BreweryInfo>>(request);
         }
     }
 }
