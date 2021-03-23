@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Saison.Models.Brewery
 {
-    public class Locations
+    public class Location
     {
         [JsonPropertyName("brewery_address")]
         public string BreweryAddress { get; set; }
