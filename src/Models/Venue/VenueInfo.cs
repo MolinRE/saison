@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Saison.Models.Venue
 {
-    public class VenueInfoFull
+    public class VenueInfo
     {
         [JsonPropertyName("venue_id")]
         public int VenueId { get; set; }

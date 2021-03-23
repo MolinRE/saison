@@ -18,7 +18,7 @@ namespace Saison
         /// <returns></returns>
         public SearchResponse Search(string q)
         {
-            return _serviceClient.SearchBrewery(q).Response;
+            return _serviceClient.SearchBrewery(q);
         }
 
         /// <summary>
@@ -26,9 +26,9 @@ namespace Saison
         /// </summary>
         /// <param name="breweryId">The Brewery ID that you want to display checkins</param>
         /// <returns></returns>
-        public BreweryInfoFull Info(int breweryId)
+        public BreweryInfo Info(int breweryId)
         {
-            return _serviceClient.BreweryInfo(breweryId).Response;
+            return _serviceClient.BreweryInfo(breweryId);
         }
     }
 }

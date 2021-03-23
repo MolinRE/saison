@@ -1,5 +1,6 @@
 ﻿using System;
 using Saison.Models;
+using Saison.Models.Activity;
 using Saison.Models.Beer;
 
 namespace Saison
@@ -25,7 +26,7 @@ namespace Saison
             return result;
         }
 
-        public BeerActivityResponse Checkins(int bid)
+        public BeerActivity Checkins(int bid)
         {
             var result = _client.BeerCheckins(bid);
             return result;

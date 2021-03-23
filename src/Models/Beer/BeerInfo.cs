@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Saison.Models.Common.Media;
 
 namespace Saison.Models.Beer
 {
@@ -59,7 +60,7 @@ namespace Saison.Models.Beer
         public bool WishList { get; set; }
 
         [JsonPropertyName("media")]
-        public MediaCollection Media { get; set; }
+        public MediaCollection<MediaCheckin<MediaBeer, MediaBrewery, MediaVenue>> Media { get; set; }
 
         [JsonPropertyName("checkins")]
         public Checkins Checkins { get; set; }

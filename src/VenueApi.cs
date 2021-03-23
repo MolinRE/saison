@@ -27,10 +27,10 @@ namespace Saison
             return result.Response.Venue.Items.FirstOrDefault();
         }
 
-        public VenueInfoFull Info(int venueId)
+        public VenueInfo Info(int venueId)
         {
             var result = _client.VenueInfo(venueId);
-            return result.Response.Venue;
+            return result;
         }
     }
 }

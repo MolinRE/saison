@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using Saison.Models.Brewery;
+using Saison.Models.Common.Media;
 
 namespace Saison.Models.Activity
 {
@@ -37,12 +39,6 @@ namespace Saison.Models.Activity
         [JsonPropertyName("like_owner")]
         public bool LikeOwner { get; set; }
 
-        [JsonPropertyName("photo_id")]
-        public int PhotoId { get; set; }
-
-        [JsonPropertyName("photo")]
-        public Photo Photo { get; set; }
-
         [JsonPropertyName("badge_id")]
         public int BadgeId { get; set; }
 
@@ -80,7 +76,7 @@ namespace Saison.Models.Activity
         public Toasts Toasts { get; set; }
 
         [JsonPropertyName("media")]
-        public Media Media { get; set; }
+        public MediaCollection<MediaBase> Media { get; set; }
 
         [JsonPropertyName("source")]
         public Source Source { get; set; }

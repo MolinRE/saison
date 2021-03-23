@@ -1,9 +1,10 @@
 using System.Text.Json.Serialization;
 using Saison.Models.Activity;
+using Saison.Models.Common.Media;
 
 namespace Saison.Models.Brewery
 {
-    public class BreweryInfoFull
+    public class BreweryInfo
     {
         [JsonPropertyName("brewery_id")]
         public int BreweryId { get; set; }
@@ -63,7 +64,7 @@ namespace Saison.Models.Brewery
         public Owners Owners { get; set; }
 
         [JsonPropertyName("media")]
-        public MediaCollection Media { get; set; }
+        public MediaCollection<MediaCheckin<MediaBeer, MediaBrewery, MediaVenue>> Media { get; set; }
 
         [JsonPropertyName("checkins")]
         public Checkins Checkins { get; set; }

@@ -16,7 +16,7 @@ namespace Saison
         {
             var result = _serviceClient.ThePubLocal(latitude, longitude, maxId, minId, limit, radius, 
                 distancePreference);
-            return result.Response;
+            return result;
         }
     }
 }
