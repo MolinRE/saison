@@ -15,10 +15,9 @@ namespace Saison
             _client = new ServiceClient();
         }
         
-        public object Search(string q)
+        public ResponseContainer<BeerSearchResponse> Search(string q)
         {
-            var result = _client.SearchBeer(q);
-            return result;
+            return _client.SearchBeer(q);
         }
         
         public ResponseContainer<BeerInfo> Info(int bid)
