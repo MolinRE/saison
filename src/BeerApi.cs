@@ -1,6 +1,4 @@
-﻿using System;
-using Saison.Models;
-using Saison.Models.Activity;
+﻿using Saison.Models.Activity;
 using Saison.Models.Beer;
 using Saison.Models.Untappd;
 
