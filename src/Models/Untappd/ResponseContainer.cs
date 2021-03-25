@@ -15,6 +15,7 @@ namespace Saison.Models.Untappd
     public class ResponseContainer<T> : ResponseContainer
         where T : new()
     {
+        [JsonPropertyName("response")]
         public T Response { get; set; }
     }
 }

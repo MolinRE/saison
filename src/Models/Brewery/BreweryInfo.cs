@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Saison.Models.Activity;
 using Saison.Models.Common.Media;
 
 namespace Saison.Models.Brewery

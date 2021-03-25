@@ -4,10 +4,10 @@ namespace Saison.Models.Untappd
 {
     public class InitTime
     {
-        [JsonPropertyName("init_time")]
+        [JsonPropertyName("time")]
         public float Time { get; set; }
         
-        [JsonPropertyName("init_time")]
+        [JsonPropertyName("measure")]
         public string Measure { get; set; }
     }
 }

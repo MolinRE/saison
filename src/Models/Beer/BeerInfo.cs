@@ -3,6 +3,12 @@ using Saison.Models.Common.Media;
 
 namespace Saison.Models.Beer
 {
+    public class BeerInfoContainer
+    {
+        [JsonPropertyName("beer")]
+        public BeerInfo Beer { get; set; }
+    }
+    
     public class BeerInfo
     {
         [JsonPropertyName("bid")]
@@ -18,7 +24,7 @@ namespace Saison.Models.Beer
         public string BeerLabelHd { get; set; }
 
         [JsonPropertyName("beer_abv")]
-        public double BeerAbv { get; set; }
+        public float BeerAbv { get; set; }
 
         [JsonPropertyName("beer_ibu")]
         public int BeerIbu { get; set; }
@@ -60,7 +66,7 @@ namespace Saison.Models.Beer
         public bool WishList { get; set; }
 
         [JsonPropertyName("media")]
-        public MediaCollection<MediaCheckin<MediaBeer, MediaBrewery, MediaVenue>> Media { get; set; }
+        public MediaCollection<MediaCheckin<MediaBeer, MediaBrewery, MediaVenueCollection>> Media { get; set; }
 
         [JsonPropertyName("checkins")]
         public Checkins Checkins { get; set; }

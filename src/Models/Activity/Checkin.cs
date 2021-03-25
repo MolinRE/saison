@@ -67,7 +67,7 @@ namespace Saison.Models.Activity
         public Brewery Brewery { get; set; }
 
         [JsonPropertyName("venue")]
-        public object Venue { get; set; }
+        public Venue Venue { get; set; }
 
         [JsonPropertyName("comments")]
         public Comments Comments { get; set; }

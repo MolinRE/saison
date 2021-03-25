@@ -17,7 +17,7 @@ namespace Saison.Models.Brewery
         public string BeerStyle { get; set; }
 
         [JsonPropertyName("beer_abv")]
-        public double BeerAbv { get; set; }
+        public float BeerAbv { get; set; }
 
         [JsonPropertyName("beer_ibu")]
         public int BeerIbu { get; set; }

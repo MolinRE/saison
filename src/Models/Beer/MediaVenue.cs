@@ -1,7 +1,13 @@
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Saison.Models.Beer
 {
+    public class MediaVenueCollection : List<MediaVenue>
+    {
+        
+    }
+    
     public class MediaVenue
     {
         [JsonPropertyName("venue_id")]
