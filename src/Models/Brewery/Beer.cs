@@ -38,7 +38,7 @@ namespace Saison.Models.Brewery
         public int UserRatingScore { get; set; }
 
         [JsonPropertyName("rating_score")]
-        public double RatingScore { get; set; }
+        public float RatingScore { get; set; }
 
         [JsonPropertyName("rating_count")]
         public int RatingCount { get; set; }
