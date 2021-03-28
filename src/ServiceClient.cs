@@ -151,11 +151,11 @@ namespace Saison
             return Execute<ResponseContainer<FoursquareLookup>>(request);
         }
 
-        public ResponseContainer<VenueInfo> VenueInfo(int venueId)
+        public ResponseContainer<VenueInfoContainer> VenueInfo(int venueId)
         {
             var request = new RestRequest($"venue/info/{venueId}", Method.GET, DataFormat.Json);
 
-            return Execute<ResponseContainer<VenueInfo>>(request);
+            return Execute<ResponseContainer<VenueInfoContainer>>(request);
         }
 
         public WishlistAddContainer WishlistAdd(int bid)

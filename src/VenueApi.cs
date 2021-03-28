@@ -30,7 +30,7 @@ namespace Saison
         /// </summary>
         /// <param name="venueId"></param>
         /// <returns></returns>
-        public ResponseContainer<VenueInfo> Info(int venueId)
+        public ResponseContainer<VenueInfoContainer> Info(int venueId)
         {
             return _client.VenueInfo(venueId);
         }
