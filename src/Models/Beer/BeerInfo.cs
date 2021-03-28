@@ -3,12 +3,6 @@ using Saison.Models.Common.Media;
 
 namespace Saison.Models.Beer
 {
-    public class BeerInfoContainer
-    {
-        [JsonPropertyName("beer")]
-        public BeerInfo Beer { get; set; }
-    }
-    
     public class BeerInfo
     {
         [JsonPropertyName("bid")]
@@ -72,7 +66,7 @@ namespace Saison.Models.Beer
         public Checkins Checkins { get; set; }
 
         [JsonPropertyName("similar")]
-        public Similar Similar { get; set; }
+        public SimilarBeers SimilarBeers { get; set; }
 
         [JsonPropertyName("friends")]
         public Friends Friends { get; set; }

@@ -3,12 +3,6 @@ using Saison.Models.Common.Media;
 
 namespace Saison.Models.Brewery
 {
-    public class BreweryInfoContainer
-    {
-        [JsonPropertyName("brewery")]
-        public BreweryInfo Brewery { get; set; }
-    }
-    
     public class BreweryInfo
     {
         [JsonPropertyName("brewery_id")]

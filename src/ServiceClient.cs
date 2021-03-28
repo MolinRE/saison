@@ -19,10 +19,19 @@ namespace Saison
         public ServiceClient()
         {
             _client = new RestClient(Host);
-            _client.UseSystemTextJson(new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true
-            });
+            _client.UseSystemTextJson(GetJsonSerializerOptions());
+        }
+
+        private static JsonSerializerOptions GetJsonSerializerOptions()
+        {
+            var options = new JsonSerializerOptions();
+            options.IgnoreNullValues = true;
+            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Saison.Models.Activity.Venue>());
+            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Saison.Models.Beer.MediaVenue>());
+            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Saison.Models.Brewery.MediaVenue>());
+            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Saison.Models.Activity.BreweryDetails>());
+            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Saison.Models.Activity.VenueDetails>());
+            return options;
         }
 
         private T Execute<T>(RestRequest request)
@@ -95,24 +104,30 @@ namespace Saison
             return response.Data;
         }
         
-        public ResponseContainer<BeerSearchResponse> SearchBeer(string q, int? offset = null, int? limit = null, string sort = null)
+        public ResponseContainer<BeerSearchResponse> SearchBeer(string q, int? offset = null, int limit = 25, string sort = "checkin")
         {
             var request = new RestRequest("search/beer", Method.GET, DataFormat.Json);
             request.AddQueryParameter("q", q);
+            request.AddQueryParameter("limit", limit.ToString());
+            request.AddQueryParameter("sort", sort);
+            if (offset.HasValue)
+            {
+                request.AddQueryParameter("offset", offset.ToString());
+            }
 
             return Execute<ResponseContainer<BeerSearchResponse>>(request);
         }
 
-        public ResponseContainer<BeerInfo> BeerInfo(int bid, bool compact = false)
+        public ResponseContainer<BeerInfoContainer> BeerInfo(int bid, bool compact = false)
         {
             var request = new RestRequest($"beer/info/{bid}", Method.GET, DataFormat.Json);
             request.AddQueryParameter("compact", compact.ToString());
 
-            return Execute<ResponseContainer<BeerInfo>>(request);
+            return Execute<ResponseContainer<BeerInfoContainer>>(request);
         }
         
-        public ResponseContainer<BeerActivity> BeerCheckins(int bid, int limit = 25, int? maxId = null, 
-            int? minId = null)
+        public ResponseContainer<BeerActivity> BeerCheckins(int bid, int? maxId = null, int? minId = null, 
+            int limit = 25)
         {
             var request = new RestRequest($"beer/checkins/{bid}", Method.GET, DataFormat.Json);
             request.AddQueryParameter("limit", limit.ToString());
@@ -174,20 +189,42 @@ namespace Saison
             return Execute<ResponseContainer<ThePub>>(request);
         }
 
-        public ResponseContainer<Models.Brewery.SearchResponse> SearchBrewery(string q)
+        public ResponseContainer<Models.Brewery.SearchResponse> SearchBrewery(string q, int? offset = null, int limit = 25)
         {
             var request = new RestRequest("search/brewery", Method.GET, DataFormat.Json);
             request.AddQueryParameter("q", q);
+            request.AddQueryParameter("limit", limit.ToString());
+            if (offset.HasValue)
+            {
+                request.AddQueryParameter("offset", offset.ToString());   
+            }
             
             return Execute<ResponseContainer<Models.Brewery.SearchResponse>>(request);
         }
 
-        public ResponseContainer<Models.Brewery.BreweryInfo> BreweryInfo(int breweryId)
+        public ResponseContainer<Models.Brewery.BreweryInfoContainer> BreweryInfo(int breweryId)
         {
             var request = new RestRequest($"brewery/info/{breweryId}", Method.GET, DataFormat.Json);
             request.AddQueryParameter("compact", false.ToString());
 
-            return Execute<ResponseContainer<Models.Brewery.BreweryInfo>>(request);
+            return Execute<ResponseContainer<Models.Brewery.BreweryInfoContainer>>(request);
+        }
+
+        public ResponseContainer<VenueActivity> VenueCheckins(int venueId, int? maxId = null, int? minId = null, int limit = 25)
+        {
+            var request = new RestRequest($"venue/checkins/{venueId}", Method.GET, DataFormat.Json);
+            request.AddQueryParameter("limit", limit.ToString());
+            if (maxId.HasValue)
+            {
+                request.AddQueryParameter("max_id", maxId.ToString());
+            }
+
+            if (minId.HasValue)
+            {
+                request.AddQueryParameter("min_id", minId.ToString());
+            }
+
+            return Execute<ResponseContainer<VenueActivity>>(request);
         }
     }
 }

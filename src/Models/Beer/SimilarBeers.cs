@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Saison.Models.Beer
 {
-    public class Similar
+    public class SimilarBeers
     {
         [JsonPropertyName("method")]
         public string Method { get; set; }
@@ -13,10 +13,5 @@ namespace Saison.Models.Beer
 
         [JsonPropertyName("items")]
         public List<SimilarBeer> Items { get; set; }
-    }
-
-    public class SimilarBeer
-    {
-        
     }
 }

@@ -42,18 +42,12 @@ namespace Saison.Models.Activity
         public string AccountType { get; set; }
 
         [JsonPropertyName("venue_details")]
-        public List<object> VenueDetails { get; set; }
+        public VenueDetails VenueDetails { get; set; }
 
         [JsonPropertyName("brewery_details")]
         public BreweryDetails BreweryDetails { get; set; }
 
         [JsonPropertyName("user_link")]
         public string UserLink { get; set; }
-    }
-
-    public class BreweryDetails
-    {
-        [JsonPropertyName("brewery_id")]
-        public int BreweryId { get; set; }
     }
 }
