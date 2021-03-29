@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Text.Json;
 using RestSharp;
 using RestSharp.Serializers.SystemTextJson;
@@ -170,8 +171,8 @@ namespace Saison
             int limit = 25, int radius = 25, DistancePreference distancePreference = DistancePreference.Miles)
         {
             var request = new RestRequest("thepub/local", Method.GET, DataFormat.Json);
-            request.AddQueryParameter("lat", latitude.ToString());
-            request.AddQueryParameter("lng", longitude.ToString());
+            request.AddQueryParameter("lat", latitude.ToString(CultureInfo.InvariantCulture));
+            request.AddQueryParameter("lng", longitude.ToString(CultureInfo.InvariantCulture));
             if (maxId.HasValue)
             {
                 request.AddQueryParameter("maxId", maxId.ToString());
