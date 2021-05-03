@@ -1,5 +1,4 @@
 # saison
-![GitHub](https://img.shields.io/github/license/MolinRE/saison)
 
 .NET Core Untappd Client
 
