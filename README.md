@@ -1,7 +1,12 @@
 # saison
+![GitHub](https://img.shields.io/github/license/MolinRE/saison)
+
 .NET Core Untappd Client
 
 ## How to install
+
+![Nuget](https://img.shields.io/nuget/v/Saison)
+![Nuget](https://img.shields.io/nuget/dt/Saison)
 
 ```
 > dotnet add package Saison
