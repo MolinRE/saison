@@ -4,7 +4,5 @@ namespace Saison
     {
         internal static string ClientId;
         internal static string ClientSecret;
-
-        internal static string AccessToken;
     }
 }

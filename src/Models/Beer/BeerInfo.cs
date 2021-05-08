@@ -82,5 +82,8 @@ namespace Saison.Models.Beer
 
         [JsonPropertyName("brewed_by")]
         public BrewedBy BrewedBy { get; set; }
+
+        [JsonPropertyName("collaborations_with")]
+        public CollaborationsWith CollaborationsWith { get; set; }
     }
 }

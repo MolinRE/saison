@@ -33,5 +33,19 @@ namespace Saison
         {
             return _serviceClient.BreweryInfo(breweryId);
         }
+        
+        /// <summary>
+        /// This method allows you the obtain an activity feed for a single brewery for Untappd. By default it will return at max 25 records. 
+        /// </summary>
+        /// <param name="breweryId">The Brewery ID that you want to display checkins</param>
+        /// <param name="maxId">The checkin ID that you want the results to start with</param>
+        /// <param name="minId">Returns only checkins that are newer than this value</param>
+        /// <param name="limit">The number of results to return, max of 25, default is 25</param>
+        /// <returns></returns>
+        public ResponseContainer<BreweryActivity> Checkins(int breweryId, int? maxId = null, int? minId = null, 
+            int limit = 25)
+        {
+            return _serviceClient.BreweryCheckins(breweryId, maxId, minId, limit);
+        }
     }
 }

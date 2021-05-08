@@ -1,11 +1,13 @@
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Text.Json;
 using RestSharp;
 using RestSharp.Serializers.SystemTextJson;
 using Saison.Models;
 using Saison.Models.Activity;
 using Saison.Models.Beer;
+using Saison.Models.Brewery;
 using Saison.Models.Untappd;
 using Saison.Models.Venue;
 using Saison.Models.Wishlist;
@@ -16,6 +18,10 @@ namespace Saison
     {
         private readonly RestClient _client;
         private const string Host = "https://api.untappd.com/v4";
+        
+        public static int XRatelimitRemaining { get; private set; }
+
+        public static int XRatelimit { get; private set; }
 
         public ServiceClient()
         {
@@ -38,20 +44,25 @@ namespace Saison
         private T Execute<T>(RestRequest request)
             where T : ResponseContainer, new()
         {
-            if (request.Method == Method.POST)
-            {
-                if (request.Body.Value is IAuthentificationRequired body)
-                {
-                    body.AccessToken = Config.AccessToken;
-                    request.AddJsonBody(body);
-                }
-            }
-            
             request.AddQueryParameter("client_id", Config.ClientId);
             request.AddQueryParameter("client_secret", Config.ClientSecret);
             request.AddHeader("User-Agent", $"JoyTapBot ({Config.ClientId})/0.1");
             
             var response = _client.Execute<T>(request);
+
+            foreach (var header in response.Headers.Where(p => p.Value != null))
+            {
+                switch (header.Name)
+                {
+                    case "X-Ratelimit-Limit":
+                        XRatelimit = int.Parse(header.Value.ToString());
+                        break;
+                    case "X-Ratelimit-Remaining":
+                        XRatelimitRemaining = int.Parse(header.Value.ToString());
+                        break;
+                }
+            }
+            
             if (response.Data == null)
             {
                 var basicResponse = JsonSerializer.Deserialize<ResponseContainer>(response.Content);
@@ -69,41 +80,40 @@ namespace Saison
             return response.Data;
         }
 
-
-        private T Execute<T, T2>(RestRequest request)
-            where T : ResponseContainer<T2>, new() 
-            where T2 : new()
-        {
-            if (request.Method == Method.POST)
-            {
-                if (request.Body.Value is IAuthentificationRequired body)
-                {
-                    body.AccessToken = Config.AccessToken;
-                    request.AddJsonBody(body);
-                }
-            }
-            
-            request.AddQueryParameter("client_id", Config.ClientId);
-            request.AddQueryParameter("client_secret", Config.ClientSecret);
-            request.AddHeader("User-Agent", $"JoyTapBot ({Config.ClientId})/0.1");
-            
-            var response = _client.Execute<T>(request);
-            if (response.Data == null)
-            {
-                var basicResponse = JsonSerializer.Deserialize<ResponseContainer<T2>>(response.Content);
-                if (basicResponse != null)
-                {
-                    var result = new T();
-                    result.Meta = basicResponse.Meta;
-                    return result;
-                }
-                if (response.ErrorException != null)
-                {
-                    throw new Exception("Ошибка при обработке ответа API Untappd", response.ErrorException);
-                }
-            }
-            return response.Data;
-        }
+        // private T Execute<T, T2>(RestRequest request)
+        //     where T : ResponseContainer<T2>, new() 
+        //     where T2 : new()
+        // {
+        //     if (request.Method == Method.POST)
+        //     {
+        //         if (request.Body.Value is IAuthentificationRequired body)
+        //         {
+        //             body.AccessToken = Config.AccessToken;
+        //             request.AddJsonBody(body);
+        //         }
+        //     }
+        //     
+        //     request.AddQueryParameter("client_id", Config.ClientId);
+        //     request.AddQueryParameter("client_secret", Config.ClientSecret);
+        //     request.AddHeader("User-Agent", $"JoyTapBot ({Config.ClientId})/0.1");
+        //     
+        //     var response = _client.Execute<T>(request);
+        //     if (response.Data == null)
+        //     {
+        //         var basicResponse = JsonSerializer.Deserialize<ResponseContainer<T2>>(response.Content);
+        //         if (basicResponse != null)
+        //         {
+        //             var result = new T();
+        //             result.Meta = basicResponse.Meta;
+        //             return result;
+        //         }
+        //         if (response.ErrorException != null)
+        //         {
+        //             throw new Exception("Ошибка при обработке ответа API Untappd", response.ErrorException);
+        //         }
+        //     }
+        //     return response.Data;
+        // }
         
         public ResponseContainer<BeerSearchResponse> SearchBeer(string q, int? offset = null, int limit = 25, string sort = "checkin")
         {
@@ -226,6 +236,23 @@ namespace Saison
             }
 
             return Execute<ResponseContainer<VenueActivity>>(request);
+        }
+
+        public ResponseContainer<BreweryActivity> BreweryCheckins(int breweryId, int? maxId, int? minId, int limit)
+        {
+            var request = new RestRequest($"brewery/checkins/{breweryId}", Method.GET, DataFormat.Json);
+            request.AddQueryParameter("limit", limit.ToString());
+            if (maxId.HasValue)
+            {
+                request.AddQueryParameter("max_id", maxId.ToString());
+            }
+
+            if (minId.HasValue)
+            {
+                request.AddQueryParameter("min_id", minId.ToString());
+            }
+
+            return Execute<ResponseContainer<BreweryActivity>>(request);
         }
     }
 }

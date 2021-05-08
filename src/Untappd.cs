@@ -34,11 +34,10 @@ namespace Saison
         /// <param name="clientId"></param>
         /// <param name="clientSecret"></param>
         /// <param name="accessToken"></param>
-        public Untappd(string clientId, string clientSecret, string accessToken = null)
+        public Untappd(string clientId, string clientSecret)
         {
             Config.ClientId = clientId;
             Config.ClientSecret = clientSecret;
-            Config.AccessToken = accessToken;
 
             Beer = new BeerApi();
             Venue = new VenueApi();
