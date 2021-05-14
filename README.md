@@ -2,10 +2,12 @@
 
 .NET Core Untappd Client
 
-## How to install
-
 ![Nuget](https://img.shields.io/nuget/v/Saison)
 ![Nuget](https://img.shields.io/nuget/dt/Saison)
+
+## How to install
+
+Install [Saison](https://www.nuget.org/packages/Saison) from NuGet:
 
 ```
 > dotnet add package Saison
