@@ -6,6 +6,11 @@ namespace Saison
     public class Untappd
     {
         /// <summary>
+        /// Authentication methods. Authentication is handled via OAuth 2.0, so you must setup your own server to authetificate a user.
+        /// </summary>
+        public AuthApi Auth { get; set; }
+
+        /// <summary>
         /// Beer methods
         /// </summary>
         public BeerApi Beer { get; set; }
@@ -28,12 +33,10 @@ namespace Saison
         public ThePubApi ThePub { get; set; }
 
         /// <summary>
-        /// Creates new instance of Untappd API wrapper. You need to provide either <see cref="clientId"/>
-        /// and <see cref="clientSecret"/> or <see cref="accessToken"/>. <see cref="accessToken"/> is required action methods.
+        /// Creates new instance of Untappd API wrapper.
         /// </summary>
-        /// <param name="clientId"></param>
-        /// <param name="clientSecret"></param>
-        /// <param name="accessToken"></param>
+        /// <param name="clientId">Public API key.</param>
+        /// <param name="clientSecret">Secret API key.</param>
         public Untappd(string clientId, string clientSecret)
         {
             Config.ClientId = clientId;
@@ -44,6 +47,7 @@ namespace Saison
             Wishlist = new WishlistApi();
             ThePub = new ThePubApi();
             Brewery = new BreweryApi();
+            Auth = new AuthApi();
         }
     }
 }

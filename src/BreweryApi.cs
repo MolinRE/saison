@@ -19,9 +19,9 @@ namespace Saison
         /// <param name="offset">The numeric offset that you what results to start</param>
         /// <param name="limit">The number of results to return, max of 50, default is 25</param>
         /// <returns></returns>
-        public ResponseContainer<SearchResponse> Search(string q, int? offset = null, int limit = 25)
+        public ResponseContainer<SearchResponse> Search(string q, int? offset = null, int limit = 25, string accessToken = null)
         {
-            return _serviceClient.SearchBrewery(q, offset, limit);
+            return _serviceClient.SearchBrewery(q, offset, limit, accessToken);
         }
 
         /// <summary>
@@ -29,9 +29,9 @@ namespace Saison
         /// </summary>
         /// <param name="breweryId">The Brewery ID that you want to display checkins</param>
         /// <returns></returns>
-        public ResponseContainer<BreweryInfoContainer> Info(int breweryId)
+        public ResponseContainer<BreweryInfoContainer> Info(int breweryId, string accessToken = null)
         {
-            return _serviceClient.BreweryInfo(breweryId);
+            return _serviceClient.BreweryInfo(breweryId, accessToken);
         }
         
         /// <summary>
@@ -43,9 +43,9 @@ namespace Saison
         /// <param name="limit">The number of results to return, max of 25, default is 25</param>
         /// <returns></returns>
         public ResponseContainer<BreweryActivity> Checkins(int breweryId, int? maxId = null, int? minId = null, 
-            int limit = 25)
+            int limit = 25, string accessToken = null)
         {
-            return _serviceClient.BreweryCheckins(breweryId, maxId, minId, limit);
+            return _serviceClient.BreweryCheckins(breweryId, maxId, minId, limit, accessToken);
         }
     }
 }

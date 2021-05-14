@@ -24,10 +24,10 @@ namespace Saison
         /// <param name="distancePreference">If you want the results returned in miles or km. Available options: "m", or "km". Default is "m"</param>
         /// <returns></returns>
         public ResponseContainer<ThePub> Local(float latitude, float longitude, int? maxId = null, int? minId = null, 
-            int limit = 25, int radius = 25, DistancePreference distancePreference = DistancePreference.Miles)
+            int limit = 25, int radius = 25, DistancePreference distancePreference = DistancePreference.Miles, string accessToken = null)
         {
             return _serviceClient.ThePubLocal(latitude, longitude, maxId, minId, limit, radius, 
-                distancePreference);
+                distancePreference, accessToken);
         }
     }
 }

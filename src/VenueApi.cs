@@ -20,9 +20,9 @@ namespace Saison
         /// </summary>
         /// <param name="foursquareVenueId"></param>
         /// <returns></returns>
-        public ResponseContainer<FoursquareLookup> FoursquareLookup(string foursquareVenueId)
+        public ResponseContainer<FoursquareLookup> FoursquareLookup(string foursquareVenueId, string accessToken = null)
         {
-            return _client.VenueFoursqaureLookup(foursquareVenueId);
+            return _client.VenueFoursqaureLookup(foursquareVenueId, accessToken);
         }
 
         /// <summary>
@@ -30,9 +30,9 @@ namespace Saison
         /// </summary>
         /// <param name="venueId"></param>
         /// <returns></returns>
-        public ResponseContainer<VenueInfoContainer> Info(int venueId)
+        public ResponseContainer<VenueInfoContainer> Info(int venueId, string accessToken = null)
         {
-            return _client.VenueInfo(venueId);
+            return _client.VenueInfo(venueId, accessToken);
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace Saison
         /// <param name="minId"></param>
         /// <param name="limit"></param>
         /// <returns></returns>
-        public ResponseContainer<VenueActivity> Checkins(int venueId, int? maxId = null, int? minId = null, int limit = 25)
+        public ResponseContainer<VenueActivity> Checkins(int venueId, int? maxId = null, int? minId = null, int limit = 25, string accessToken = null)
         {
-            return _client.VenueCheckins(venueId, maxId, minId, limit);
+            return _client.VenueCheckins(venueId, maxId, minId, limit, accessToken);
         }
     }
 }

@@ -13,9 +13,9 @@ namespace Saison
         /// This method will allow you to add a beer to your wish list.
         /// </summary>
         /// <param name="bid">The numeric BID of the beer you want to add your list</param>
-        public void Add(int bid)
+        public void Add(int bid, string accessToken)
         {
-            _client.WishlistAdd(bid);
+            _client.WishlistAdd(bid, accessToken);
         }
     }
 }

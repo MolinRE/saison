@@ -23,9 +23,9 @@ namespace Saison
         /// (default), name - sorted by alphabetic beer name</param>
         /// <returns></returns>
         public ResponseContainer<BeerSearchResponse> Search(string q, int? offset = null, int limit = 25, 
-            SearchBeerSorting sorting = SearchBeerSorting.Checkin)
+            SearchBeerSorting sorting = SearchBeerSorting.Checkin, string accessToken = null)
         {
-            return _client.SearchBeer(q, offset, limit, sorting.ToString().ToLower());
+            return _client.SearchBeer(q, offset, limit, sorting.ToString().ToLower(), accessToken);
         }
         
         /// <summary>
@@ -33,9 +33,9 @@ namespace Saison
         /// </summary>
         /// <param name="bid"></param>
         /// <returns></returns>
-        public ResponseContainer<BeerInfoContainer> Info(int bid)
+        public ResponseContainer<BeerInfoContainer> Info(int bid, string accessToken = null)
         {
-            return _client.BeerInfo(bid);
+            return _client.BeerInfo(bid, false, accessToken);
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace Saison
         /// <param name="minId">Returns only checkins that are newer than this value</param>
         /// <param name="limit">The number of results to return, max of 25, default is 25</param>
         /// <returns></returns>
-        public ResponseContainer<BeerActivity> Checkins(int bid, int? maxId = null, int? minId = null, int limit = 25)
+        public ResponseContainer<BeerActivity> Checkins(int bid, int? maxId = null, int? minId = null, int limit = 25, string accessToken = null)
         {
-            return _client.BeerCheckins(bid, maxId, minId, limit);
+            return _client.BeerCheckins(bid, maxId, minId, limit, accessToken);
         }
     }
 }
