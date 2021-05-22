@@ -31,6 +31,9 @@ namespace Saison
         /// The Pub methods
         /// </summary>
         public ThePubApi ThePub { get; set; }
+        
+        public static int XRatelimit => ServiceClient.XRatelimit;
+        public static int XRatelimitRemaining => ServiceClient.XRatelimitRemaining;
 
         /// <summary>
         /// Creates new instance of Untappd API wrapper.
