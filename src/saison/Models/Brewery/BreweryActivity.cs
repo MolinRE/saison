@@ -10,9 +10,6 @@ namespace Saison.Models.Brewery
         [JsonPropertyName("pagination")]
         public Pagination Pagination { get; set; }
 
-        [JsonPropertyName("table")]
-        public bool Table { get; set; }
-
         [JsonPropertyName("mem")]
         public bool Mem { get; set; }
 

@@ -22,18 +22,14 @@ namespace Saison
         /// Venue methods
         /// </summary>
         public VenueApi Venue { get; set; }
-        /// <summary>
-        /// User's wishlist methods
-        /// </summary>
-        public WishlistApi Wishlist { get; set; }
         
         /// <summary>
         /// The Pub methods
         /// </summary>
         public ThePubApi ThePub { get; set; }
         
-        public static int XRatelimit => ServiceClient.XRatelimit;
-        public static int XRatelimitRemaining => ServiceClient.XRatelimitRemaining;
+        public static int XRateLimit => ServiceClientAsync.XRateLimit;
+        public static int XRateLimitRemaining => ServiceClientAsync.XRateLimitRemaining;
 
         /// <summary>
         /// Creates new instance of Untappd API wrapper.
@@ -47,7 +43,6 @@ namespace Saison
 
             Beer = new BeerApi();
             Venue = new VenueApi();
-            Wishlist = new WishlistApi();
             ThePub = new ThePubApi();
             Brewery = new BreweryApi();
             Auth = new AuthApi();

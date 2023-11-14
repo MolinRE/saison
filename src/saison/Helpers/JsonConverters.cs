@@ -19,8 +19,7 @@ namespace Saison.Helpers
         }
 
         public override void Write(Utf8JsonWriter writer, TVenue value, JsonSerializerOptions options)
-        { 
-            
+        {
         }
     }
 }
