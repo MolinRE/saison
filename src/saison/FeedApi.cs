@@ -7,13 +7,13 @@ using Saison.Models.Untappd;
 
 namespace Saison
 {
-    public class ThePubApi
+    public class FeedApi
     {
         private static readonly IFormatProvider Format = CultureInfo.InvariantCulture;
         
         private readonly ServiceClientAsync _serviceClient;
 
-        public ThePubApi()
+        public FeedApi()
         {
             _serviceClient = new ServiceClientAsync();
         }
@@ -29,8 +29,9 @@ namespace Saison
         /// <param name="radius">The max radius you would like the check-ins to start within, max of 25, default is 25</param>
         /// <param name="distancePreference">If you want the results returned in miles or km. Available options: <see cref="DistancePreference"/>. Default is "m"</param>
         /// <param name="accessToken"></param>
+        /// <remarks>This method in not present in documentation</remarks>
         /// <returns></returns>
-        public async Task<ResponseContainer<ThePub>> Local(float latitude, float longitude, int? maxId = null, int? minId = null, int limit = 25, int radius = 25, string distancePreference = DistancePreference.Miles, string? accessToken = null)
+        public async Task<ResponseContainer<ThePub>> GetPublicFeed(float latitude, float longitude, int? maxId = null, int? minId = null, int limit = 25, int radius = 25, string distancePreference = DistancePreference.Miles, string? accessToken = null)
         {
             var builder = new StringBuilder();
             builder.Append($"thepub/local?lat={latitude.ToString(Format)}&lng={longitude.ToString(Format)}&limit={limit}&radius={radius}&dist_pref={distancePreference}");

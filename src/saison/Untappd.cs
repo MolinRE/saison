@@ -26,7 +26,7 @@ namespace Saison
         /// <summary>
         /// The Pub methods
         /// </summary>
-        public ThePubApi ThePub { get; set; }
+        public FeedApi Feed { get; set; }
         
         public static int XRateLimit => ServiceClientAsync.XRateLimit;
         public static int XRateLimitRemaining => ServiceClientAsync.XRateLimitRemaining;
@@ -43,7 +43,7 @@ namespace Saison
 
             Beer = new BeerApi();
             Venue = new VenueApi();
-            ThePub = new ThePubApi();
+            Feed = new FeedApi();
             Brewery = new BreweryApi();
             Auth = new AuthApi();
         }

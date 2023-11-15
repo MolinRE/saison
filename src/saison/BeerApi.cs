@@ -48,13 +48,13 @@ namespace Saison
         /// <param name="compact"></param>
         /// <param name="accessToken"></param>
         /// <returns></returns>
-        public async Task<ResponseContainer<BeerInfoContainer>> Info(int bid, bool compact = false, string? accessToken = null)
+        public async Task<BeerInfoResponse> GetInfo(int bid, bool compact = false, string? accessToken = null)
         {
             var builder = new StringBuilder();
             builder.Append($"beer/info/{bid}?compact={compact}");
             builder.AppendAccessToken(accessToken);
             
-            return await _client.ExecuteGetAsync<ResponseContainer<BeerInfoContainer>>(builder.ToString());
+            return await _client.ExecuteGetAsync<BeerInfoResponse>(builder.ToString());
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Saison
         /// <param name="minId">Returns only checkins that are newer than this value</param>
         /// <param name="limit">The number of results to return, max of 25, default is 25</param>
         /// <returns></returns>
-        public async Task<ResponseContainer<BeerActivity>> Checkins(int bid, int? maxId = null, int? minId = null, int limit = 25, string accessToken = null)
+        public async Task<ResponseContainer<BeerActivity>> GetCheckins(int bid, int? maxId = null, int? minId = null, int limit = 25, string accessToken = null)
         {
             var builder = new StringBuilder();
             builder.Append($"beer/checkins/{bid}?limit={limit}");

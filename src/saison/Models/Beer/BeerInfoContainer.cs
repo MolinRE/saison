@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Saison.Models.Untappd;
 
 namespace Saison.Models.Beer
 {
@@ -6,5 +7,11 @@ namespace Saison.Models.Beer
     {
         [JsonPropertyName("beer")]
         public BeerInfo Beer { get; set; }
+    }
+
+    public class BeerInfoResponse : ResponseContainer
+    {
+        [JsonPropertyName("response")]
+        public BeerInfoContainer Response { get; set; }
     }
 }

@@ -45,7 +45,7 @@ public class BreweryApi
     /// <param name="breweryId">The Brewery ID that you want to display checkins</param>
     /// <param name="accessToken"></param>
     /// <returns></returns>
-    public async Task<ResponseContainer<BreweryInfoContainer>> InfoAsync(int breweryId, string? accessToken = null)
+    public async Task<ResponseContainer<BreweryInfoContainer>> GetInfo(int breweryId, string? accessToken = null)
     {
         var builder = new StringBuilder();
         // question mark at the end to safely add tokens later (see CreateUri())
@@ -68,7 +68,7 @@ public class BreweryApi
     /// <param name="limit">The number of results to return, max of 25, default is 25</param>
     /// <param name="accessToken"></param>
     /// <returns></returns>
-    public async Task<ResponseContainer<BreweryActivity>> Checkins(int breweryId, int? maxId = null, int? minId = null, int limit = 25, string? accessToken = null)
+    public async Task<ResponseContainer<BreweryActivity>> GetCheckins(int breweryId, int? maxId = null, int? minId = null, int limit = 25, string? accessToken = null)
     {
         var builder = new StringBuilder();
         builder.Append($"brewery/checkins/{breweryId}?limit={limit}");

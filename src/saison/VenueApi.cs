@@ -22,7 +22,7 @@ namespace Saison
         /// <param name="foursquareVenueId"></param>
         /// <param name="accessToken"></param>
         /// <returns></returns>
-        public async Task<ResponseContainer<FoursquareLookup>> FoursquareLookup(string foursquareVenueId, string? accessToken = null)
+        public async Task<ResponseContainer<FoursquareLookup>> GetVenueByFoursquareId(string foursquareVenueId, string? accessToken = null)
         {
             var builder = new StringBuilder();
             builder.Append($"venue/foursquare_lookup/{foursquareVenueId}?");
@@ -37,7 +37,7 @@ namespace Saison
         /// <param name="venueId"></param>
         /// <param name="accessToken"></param>
         /// <returns></returns>
-        public async Task<ResponseContainer<VenueInfoContainer>> Info(int venueId, string? accessToken = null)
+        public async Task<ResponseContainer<VenueInfoContainer>> GetInfo(int venueId, string? accessToken = null)
         {
             var builder = new StringBuilder();
             builder.Append($"venue/info/{venueId}?");
@@ -55,7 +55,7 @@ namespace Saison
         /// <param name="limit"></param>
         /// <param name="accessToken"></param>
         /// <returns></returns>
-        public async Task<ResponseContainer<VenueActivity>> Checkins(int venueId, int? maxId = null, int? minId = null, int limit = 25, string accessToken = null)
+        public async Task<ResponseContainer<VenueActivity>> GetCheckins(int venueId, int? maxId = null, int? minId = null, int limit = 25, string accessToken = null)
         {
             var builder = new StringBuilder();
             builder.Append($"venue/checkins/{venueId}?limit={limit}");
