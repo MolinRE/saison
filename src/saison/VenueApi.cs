@@ -22,7 +22,7 @@ namespace Saison
         /// <param name="foursquareVenueId"></param>
         /// <param name="accessToken"></param>
         /// <returns></returns>
-        public async Task<ResponseContainer<FoursquareLookup>> GetVenueByFoursquareId(string foursquareVenueId, string? accessToken = null)
+        public async Task<ResponseContainer<FoursquareLookup>> LookupFoursquare(string foursquareVenueId, string? accessToken = null)
         {
             var builder = new StringBuilder();
             builder.Append($"venue/foursquare_lookup/{foursquareVenueId}?");

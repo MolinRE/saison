@@ -8,10 +8,4 @@ namespace Saison.Models.Beer
         [JsonPropertyName("beer")]
         public BeerInfo Beer { get; set; }
     }
-
-    public class BeerInfoResponse : ResponseContainer
-    {
-        [JsonPropertyName("response")]
-        public BeerInfoContainer Response { get; set; }
-    }
 }
