@@ -48,13 +48,13 @@ namespace Saison
         /// <param name="compact"></param>
         /// <param name="accessToken"></param>
         /// <returns></returns>
-        public async Task<ResponseContainer<BeerInfo>> GetInfo(int bid, bool compact = false, string? accessToken = null)
+        public async Task<ResponseContainer<BeerInfoContainer>> GetInfo(int bid, bool compact = false, string? accessToken = null)
         {
             var builder = new StringBuilder();
             builder.Append($"beer/info/{bid}?compact={compact}");
             builder.AppendAccessToken(accessToken);
             
-            return await _client.ExecuteGetAsync<ResponseContainer<BeerInfo>>(builder.ToString());
+            return await _client.ExecuteGetAsync<ResponseContainer<BeerInfoContainer>>(builder.ToString());
         }
 
         /// <summary>
