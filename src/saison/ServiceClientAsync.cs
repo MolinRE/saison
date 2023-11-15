@@ -15,8 +15,6 @@ namespace Saison
             BaseAddress = new Uri(Host)
         };
 
-        private string? _debugLastResponse;
-
         private const string Host = "https://api.untappd.com/v4/";
         
         public static int XRateLimitRemaining { get; private set; }
@@ -25,75 +23,41 @@ namespace Saison
 
         public ServiceClientAsync()
         {
-            Client.DefaultRequestHeaders.UserAgent.ParseAdd($"JoyTapBot/0.1 ({Config.ClientId})");
-            _debugLastResponse = null;
+            Client.DefaultRequestHeaders.UserAgent.ParseAdd($"JoyTapBot/0.2 ({Config.ClientId})");
         }
-        
+
         internal async Task<T> ExecuteGetAsync<T>(string url)
             where T : ResponseContainer, new()
         {
-            try
+            using var request = new HttpRequestMessage();
+            request.Method = HttpMethod.Get;
+            request.RequestUri = CreateUri(url);
+            request.Headers.Add("Connection", "keep-alive");
+
+            using var response = await Client.SendAsync(request);
+            foreach (var header in response.Headers)
             {
-                Console.WriteLine("========== DEBUG START ==========");
-                using (var request = new HttpRequestMessage())
+                switch (header.Key)
                 {
-                    request.Method = HttpMethod.Get;
-                    request.RequestUri = CreateUri(url);;
-                    Console.WriteLine("request.RequestUri:");
-                    request.Headers.Add("Connection", "keep-alive");
-
-                    using (var response = await Client.SendAsync(request))
-                    {
-                        Console.WriteLine("\t" + request.RequestUri);
-                        Console.WriteLine("response.RequestMessage.Headers:");
-                        foreach (var h in response.RequestMessage.Headers)
-                        {
-                            Console.WriteLine($"\t- {h.Key}: {string.Join(", ", h.Value)}");
-                        }
-
-                        Console.WriteLine("response.Headers:");
-                        foreach (var h in response.Headers)
-                        {
-                            Console.WriteLine($"\t- {h.Key}: {string.Join(", ", h.Value)}");
-                        }
-
-                        foreach (var header in response.Headers)
-                        {
-                            switch (header.Key)
-                            {
-                                case "X-Ratelimit-Limit":
-                                    XRateLimit = int.Parse(header.Value.ToString());
-                                    break;
-                                case "X-Ratelimit-Remaining":
-                                    XRateLimitRemaining = int.Parse(header.Value.ToString());
-                                    break;
-                            }
-                        }
-
-                        _debugLastResponse = await response.Content.ReadAsStringAsync();
-                        if (response.StatusCode == HttpStatusCode.OK)
-                        {
-                            return await ReadContentAsync<T>(response.Content);
-                        }
-
-                        var basicResponse = await ReadContentAsync<ResponseContainer>(response.Content);
-                        return new T
-                        {
-                            Meta = basicResponse.Meta
-                        };
-
-                    }
+                    case "X-Ratelimit-Limit":
+                        XRateLimit = int.Parse(header.Value.ToString());
+                        break;
+                    case "X-Ratelimit-Remaining":
+                        XRateLimitRemaining = int.Parse(header.Value.ToString());
+                        break;
                 }
             }
-            catch (Exception e)
+
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                Console.WriteLine(e);
-                throw;
+                return await ReadContentAsync<T>(response.Content);
             }
-            finally
+
+            var basicResponse = await ReadContentAsync<ResponseContainer>(response.Content);
+            return new T
             {
-                Console.WriteLine("========== DEBUG END ==========");
-            }
+                Meta = basicResponse.Meta
+            };
         }
 
         private static Uri CreateUri(string url)
@@ -110,8 +74,9 @@ namespace Saison
         {
             await using var stream = await content.ReadAsStreamAsync();
             stream.Position = 0;
-            return await JsonSerializer.DeserializeAsync<T>(stream, GetJsonSerializerOptions()) 
-                   ?? throw new Exception("Чё за хуйня, там под капотом код не возвращет nullable. Это меня Rider заставил поставить.");
+#pragma warning disable CS8603 // Possible null reference return.
+            return await JsonSerializer.DeserializeAsync<T>(stream, GetJsonSerializerOptions());
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
         private static JsonSerializerOptions GetJsonSerializerOptions()
@@ -120,11 +85,11 @@ namespace Saison
             {
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
             };
-            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Saison.Models.Activity.Venue>());
-            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Saison.Models.Beer.MediaVenue>());
-            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Saison.Models.Brewery.MediaVenue>());
-            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Saison.Models.Activity.BreweryDetails>());
-            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Saison.Models.Activity.VenueDetails>());
+            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Activity.Venue>());
+            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Beer.MediaVenue>());
+            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Brewery.MediaVenue>());
+            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Activity.BreweryDetails>());
+            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Activity.VenueDetails>());
             return options;
         }
     }
