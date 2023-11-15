@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Saison.Models.Untappd;
 
 namespace Saison.Models.Beer
 {

@@ -20,7 +20,11 @@ namespace Saison.Models.Brewery
         [JsonPropertyName("time")]
         public float Time { get; set; }
         
+        /// <summary>
+        /// Table
+        /// </summary>
+        /// <remarks>Suppose it's Untappd database table name</remarks>
         [JsonPropertyName("table")]
-        public bool Table { get; set; }
+        public string Table { get; set; }
     }
 }

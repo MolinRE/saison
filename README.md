@@ -22,11 +22,11 @@ using Saison;
 
 var client = new Untappd("clientId", "clientSecret");
 // Search for beer
-client.Beer.Search("punk ipa");
+await client.Beer.Search("punk ipa");
 // Get beer info
-client.Beer.Info(2819207);
+await client.Beer.Info(2819207);
 // Get local activity
-client.ThePub.Local(55.762611, 37.58996);
+await client.ThePub.Local(55.762611, 37.58996);
 ```
 
 Checkins and more POST-methods coming soon.
@@ -67,7 +67,7 @@ Checkins and more POST-methods coming soon.
 - Reject Friend
 - Add Comment
 - Remove Comment
-- ✅ Add to Wish List
+- Add to Wish List
 - Remove from Wish List
 
 ### Utilities
