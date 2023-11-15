@@ -2,9 +2,9 @@
 
 namespace Saison.Extensions;
 
-public static class StringBuilderExtensions
+internal static class StringBuilderExtensions
 {
-    public static StringBuilder AppendAccessToken(this StringBuilder builder, string? accessToken = null)
+    internal static StringBuilder AppendAccessToken(this StringBuilder builder, string? accessToken = null)
     {
         if (accessToken != null)
         {

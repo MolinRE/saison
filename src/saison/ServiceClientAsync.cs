@@ -17,9 +17,9 @@ namespace Saison
 
         private const string Host = "https://api.untappd.com/v4/";
         
-        public static int XRateLimitRemaining { get; private set; }
+        internal static int XRateLimitRemaining { get; private set; }
 
-        public static int XRateLimit { get; private set; }
+        internal static int XRateLimit { get; private set; }
 
         public ServiceClientAsync()
         {

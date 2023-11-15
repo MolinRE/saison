@@ -6,7 +6,17 @@ namespace Saison
     public class Untappd
     {
         /// <summary>
-        /// Authentication methods. Authentication is handled via OAuth 2.0, so you must setup your own server to authetificate a user.
+        /// The limit for API access for the current key
+        /// </summary>
+        public static int XRateLimit => ServiceClientAsync.XRateLimit;
+        
+        /// <summary>
+        /// The remaining limit for API access for the current key
+        /// </summary>
+        public static int XRateLimitRemaining => ServiceClientAsync.XRateLimitRemaining;
+        
+        /// <summary>
+        /// Authentication methods. Authentication is handled via OAuth 2.0, so you must setup your own server to authenticate a user.
         /// </summary>
         public AuthApi Auth { get; set; }
 
@@ -14,10 +24,12 @@ namespace Saison
         /// Beer methods
         /// </summary>
         public BeerApi Beer { get; set; }
+        
         /// <summary>
         /// Brewery methods
         /// </summary>
         public BreweryApi Brewery { get; set; }
+        
         /// <summary>
         /// Venue methods
         /// </summary>
@@ -27,9 +39,6 @@ namespace Saison
         /// The Pub methods
         /// </summary>
         public FeedApi Feed { get; set; }
-        
-        public static int XRateLimit => ServiceClientAsync.XRateLimit;
-        public static int XRateLimitRemaining => ServiceClientAsync.XRateLimitRemaining;
 
         /// <summary>
         /// Creates new instance of Untappd API wrapper.
