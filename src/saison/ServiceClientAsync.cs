@@ -27,7 +27,7 @@ namespace Saison
         }
 
         internal async Task<T> ExecuteGetAsync<T>(string url)
-            where T : ResponseContainer, new()
+            where T : ResponseContainerBase, new()
         {
             using var request = new HttpRequestMessage();
             request.Method = HttpMethod.Get;
@@ -90,6 +90,7 @@ namespace Saison
             options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Brewery.MediaVenue>());
             options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Activity.BreweryDetails>());
             options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Activity.VenueDetails>());
+            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Feeds.Activity.ActivityFeed>());
             return options;
         }
     }

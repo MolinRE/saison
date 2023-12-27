@@ -52,5 +52,13 @@ namespace Saison
 
             return await _serviceClient.ExecuteGetAsync<ResponseContainer<ThePub>>(builder.ToString());
         }
+
+        public async Task<ResponseContainerNotifications<Models.Feeds.Activity.ActivityFeed>> Activity(string accessToken)
+        {
+            var builder = new StringBuilder();
+            builder.Append($"checkin/recent?access_token={accessToken}");
+
+            return await _serviceClient.ExecuteGetAsync<ResponseContainerNotifications<Models.Feeds.Activity.ActivityFeed>>(builder.ToString());
+        }
     }
 }
