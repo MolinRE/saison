@@ -13,6 +13,9 @@ namespace Saison.Models.Beer
         [JsonPropertyName("beer_label")]
         public string BeerLabel { get; set; }
 
+        [JsonPropertyName("beer_style")]
+        public string BeerStyle { get; set; }
+
         [JsonPropertyName("beer_abv")]
         public float BeerAbv { get; set; }
 
@@ -27,9 +30,6 @@ namespace Saison.Models.Beer
 
         [JsonPropertyName("created_at")]
         public string CreatedAt { get; set; }
-
-        [JsonPropertyName("beer_style")]
-        public string BeerStyle { get; set; }
 
         [JsonPropertyName("in_production")]
         public int InProduction { get; set; }
