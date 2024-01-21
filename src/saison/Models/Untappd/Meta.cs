@@ -12,6 +12,12 @@ namespace Saison.Models.Untappd
         /// </summary>
         [JsonPropertyName("code")]
         public int Code { get; set; }
+        
+        /// <summary>
+        /// Only for auth
+        /// </summary>
+        [JsonPropertyName("http_code")]
+        public int HttpCode { get; set; }
 
         /// <summary>
         /// Possible values:

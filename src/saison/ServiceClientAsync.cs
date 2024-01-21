@@ -91,6 +91,7 @@ namespace Saison
             options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Activity.BreweryDetails>());
             options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Activity.VenueDetails>());
             options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Feeds.Activity.Venue>());
+            options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.AuthResponse>());
             return options;
         }
     }
