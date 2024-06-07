@@ -1,10 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Saison.Models
+namespace Saison.Models;
+
+public class AuthResponse
 {
-    public class AuthResponse
-    {
-        [JsonPropertyName("access_token")]
-        public string AccessToken { get; set; }
-    }
+    [JsonPropertyName("access_token")]
+    public string AccessToken { get; set; }
 }

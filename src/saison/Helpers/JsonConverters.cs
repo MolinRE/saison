@@ -14,20 +14,6 @@ namespace Saison.Helpers
             {
                 return null;
             }
-
-            var rawText = jsonDoc.RootElement.GetRawText();
-            TModel model;
-            try
-            {
-                model = JsonSerializer.Deserialize<TModel>(rawText);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
-            return model;
             
             return JsonSerializer.Deserialize<TModel>(jsonDoc.RootElement.GetRawText());
         }

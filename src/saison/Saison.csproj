@@ -4,24 +4,24 @@
         <TargetFramework>netstandard2.1</TargetFramework>
         <AssemblyName>Saison</AssemblyName>
         <RootNamespace>Saison</RootNamespace>
-        <PackageVersion>0.3.3</PackageVersion>
+        <PackageVersion>0.4.0</PackageVersion>
         <Title>Saison</Title>
         <Authors>Konstantin Komarov</Authors>
         <Description>Saison is a wrapper for Untappd API.</Description>
-        <Copyright>Konstantin Komarov, 2023</Copyright>
+        <Copyright>Konstantin Komarov, 2024</Copyright>
         <PackageProjectUrl>https://github.com/molinre/saison</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/MolinRE/saison/blob/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/molinre/saison</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>untappd, beer</PackageTags>
-        <AssemblyVersion>0.3.3.0</AssemblyVersion>
-        <FileVersion>0.3.3.0</FileVersion>
+        <AssemblyVersion>0.4.0.0</AssemblyVersion>
+        <FileVersion>0.4.0.0</FileVersion>
         <NeutralLanguage>en</NeutralLanguage>
-        <LangVersion>11</LangVersion>
+        <LangVersion>12</LangVersion>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageReleaseNotes>Removed RestSharp</PackageReleaseNotes>
+        <PackageReleaseNotes></PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>

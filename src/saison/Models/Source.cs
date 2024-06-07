@@ -1,13 +1,12 @@
 using System.Text.Json.Serialization;
 
-namespace Saison.Models
-{
-    public class Source
-    {
-        [JsonPropertyName("app_name")]
-        public string AppName { get; set; }
+namespace Saison.Models;
 
-        [JsonPropertyName("app_website")]
-        public string AppWebsite { get; set; }
-    }
+public class Source
+{
+    [JsonPropertyName("app_name")]
+    public string AppName { get; set; }
+
+    [JsonPropertyName("app_website")]
+    public string AppWebsite { get; set; }
 }

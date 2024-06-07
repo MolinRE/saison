@@ -46,7 +46,7 @@ Checkins and more POST-methods coming soon.
 ### Info / Search
 
 - User Info
-- User Wish List
+- ✅ User Wish List
 - User Friends
 - User Badges
 - User Beers
@@ -67,8 +67,8 @@ Checkins and more POST-methods coming soon.
 - Reject Friend
 - Add Comment
 - Remove Comment
-- Add to Wish List
-- Remove from Wish List
+- ✅ Add to Wish List
+- ✅ Remove from Wish List
 
 ### Utilities
 

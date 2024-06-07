@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -6,7 +7,19 @@ namespace Saison.Models.Untappd
     public class ResponseContainerBase
     {
         [JsonPropertyName("meta")]
-        public Meta Meta { get; set; } 
+        public Meta Meta { get; set; }
+
+        [JsonIgnore]
+        public int XRateLimit { get; set; }
+
+        [JsonIgnore]
+        public int XRateLimitRemaining { get; set; }
+
+        [JsonIgnore]
+        public DateTime? XRateLimitExpired { get; set; }
+        
+        [JsonIgnore]
+        public string XAuthType { get; set; }
     }
     
     public class ResponseContainer : ResponseContainerBase

@@ -1,13 +1,11 @@
 using System.Text.Json.Serialization;
 
-namespace Saison.Models.Untappd
+namespace Saison.Models.Untappd;
+public class InitTime
 {
-    public class InitTime
-    {
-        [JsonPropertyName("time")]
-        public float Time { get; set; }
-        
-        [JsonPropertyName("measure")]
-        public string Measure { get; set; }
-    }
+    [JsonPropertyName("time")]
+    public float Time { get; set; }
+    
+    [JsonPropertyName("measure")]
+    public string Measure { get; set; }
 }

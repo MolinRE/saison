@@ -1,10 +1,10 @@
+using Saison.Models.Brewery;
+using Saison.Models.Untappd;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using Saison.Models.Brewery;
-using Saison.Models.Untappd;
 
-namespace Saison;
+namespace Saison.Api;
 
 public class BreweryApi
 {
@@ -12,7 +12,7 @@ public class BreweryApi
 
     public BreweryApi()
     {
-        _serviceClient = new ServiceClientAsync();
+        _serviceClient = new();
     }
 
     /// <summary>
