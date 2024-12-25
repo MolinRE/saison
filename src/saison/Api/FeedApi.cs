@@ -56,10 +56,28 @@ public class FeedApi
         return await _serviceClient.ExecuteGetAsync<ResponseContainer<ThePub>>(builder.ToString());
     }
 
-    public async Task<ResponseContainerNotifications<Models.Feeds.Activity.ActivityFeed>> Activity(string accessToken)
+    public async Task<ResponseContainerNotifications<Models.Feeds.Activity.ActivityFeed>> Activity(
+        string accessToken,
+        int? maxId = null,
+        int? minId = null,
+        int? limit = null)
     {
         var builder = new StringBuilder();
         builder.Append($"checkin/recent?access_token={accessToken}");
+        if (maxId.HasValue)
+        {
+            builder.Append($"&maxId={maxId}");
+        }
+
+        if (minId.HasValue)
+        {
+            builder.Append($"&minId={minId}");
+        }
+
+        if (limit.HasValue)
+        {
+            builder.Append($"&limit={limit}");
+        }
 
         return await _serviceClient.ExecuteGetAsync<ResponseContainerNotifications<Models.Feeds.Activity.ActivityFeed>>(
             builder.ToString());
