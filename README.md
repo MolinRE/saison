@@ -36,7 +36,7 @@ Checkins and more POST-methods coming soon.
 ### Feeds
 
 - Activity Feed
-- User Activity Feed
+- ✅ User Activity Feed
 - ✅ The Pub (Local)
 - ✅ Venue Activity Feed
 - ✅ Beer Activity Feed

@@ -5,7 +5,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Saison.Models.Untappd;
-using System.IO;
 using System.Linq;
 
 namespace Saison;
@@ -18,6 +17,23 @@ public class ServiceClientAsync
     };
 
     private const string Host = "https://api.untappd.com/v4/";
+
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        NumberHandling = JsonNumberHandling.AllowReadingFromString,
+        Converters =
+        {
+            new Helpers.ArrayOrObjectConverter<Notifications>(),
+            new Helpers.ArrayOrObjectConverter<Models.Activity.Venue>(),
+            new Helpers.ArrayOrObjectConverter<Models.Beer.MediaVenue>(),
+            new Helpers.ArrayOrObjectConverter<Models.Brewery.MediaVenue>(),
+            new Helpers.ArrayOrObjectConverter<Models.Activity.BreweryDetails>(),
+            new Helpers.ArrayOrObjectConverter<Models.Activity.VenueDetails>(),
+            new Helpers.ArrayOrObjectConverter<Models.Feeds.Activity.Venue>(),
+            new Helpers.ArrayOrObjectConverter<Models.AuthResponse>()
+        }
+    };
 
     public ServiceClientAsync()
     {
@@ -75,43 +91,15 @@ public class ServiceClientAsync
             return new(url, UriKind.Relative);
         }
 
-        return new(url + $"&client_id={Config.ClientId}&client_secret={Config.ClientSecret}",
+        return new(
+            url + $"&client_id={Config.ClientId}&client_secret={Config.ClientSecret}",
             UriKind.RelativeOrAbsolute);
     }
 
     private static async Task<T> ReadContentAsync<T>(HttpContent content)
     {
-        await using var stream = await content.ReadAsStreamAsync();
-        var bd = await BinaryData.FromStreamAsync(stream);
-
-        try
-        {
 #pragma warning disable CS8603 // Possible null reference return.
-            return await JsonSerializer.DeserializeAsync<T>(bd.ToStream(), GetJsonSerializerOptions());
+        return await JsonSerializer.DeserializeAsync<T>(await content.ReadAsStreamAsync(), JsonOptions);
 #pragma warning restore CS8603 // Possible null reference return.
-        }
-        catch (Exception ex)
-        {
-            await File.WriteAllBytesAsync(@"C:\Users\Константин\dev\saison_debug.json", bd.ToArray());
-            Console.WriteLine(ex);
-            throw;
-        }
-    }
-
-    public static JsonSerializerOptions GetJsonSerializerOptions()
-    {
-        var options = new JsonSerializerOptions
-        {
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-        };
-        options.Converters.Add(new Helpers.ArrayOrObjectConverter<Notifications>());
-        options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Activity.Venue>());
-        options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Beer.MediaVenue>());
-        options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Brewery.MediaVenue>());
-        options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Activity.BreweryDetails>());
-        options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Activity.VenueDetails>());
-        options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Feeds.Activity.Venue>());
-        options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.AuthResponse>());
-        return options;
     }
 }
