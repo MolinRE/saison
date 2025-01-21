@@ -56,7 +56,7 @@ public class FeedApi
         return await _serviceClient.ExecuteGetAsync<ResponseContainer<ThePub>>(builder.ToString());
     }
 
-    public async Task<ResponseContainerNotifications<Models.Feeds.Activity.ActivityFeed>> Activity(
+    public async Task<ResponseContainer<Models.Feeds.Activity.ActivityFeed>> Activity(
         string accessToken,
         int? maxId = null,
         int? minId = null,
@@ -79,7 +79,7 @@ public class FeedApi
             builder.Append($"&limit={limit}");
         }
 
-        return await _serviceClient.ExecuteGetAsync<ResponseContainerNotifications<Models.Feeds.Activity.ActivityFeed>>(
+        return await _serviceClient.ExecuteGetAsync<ResponseContainer<Models.Feeds.Activity.ActivityFeed>>(
             builder.ToString());
     }
 }

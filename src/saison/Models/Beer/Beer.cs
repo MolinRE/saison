@@ -35,7 +35,7 @@ namespace Saison.Models.Beer
         public int InProduction { get; set; }
 
         [JsonPropertyName("auth_rating")]
-        public int AuthRating { get; set; }
+        public float AuthRating { get; set; }
 
         [JsonPropertyName("wish_list")]
         public bool WishList { get; set; }

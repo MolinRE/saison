@@ -15,18 +15,18 @@ public class UserApi
         _serviceClient = new();
     }
     
-    public async Task<ResponseContainerNotifications<WishlistAction>> WishlistAdd(int bid, string accessToken)
+    public async Task<ResponseContainer<WishlistAction>> WishlistAdd(int bid, string accessToken)
     {
         var builder = new StringBuilder($"/v4/user/wishlist/add?bid={bid}&access_token={accessToken}");
 
-        return await _serviceClient.ExecuteGetAsync<ResponseContainerNotifications<WishlistAction>>(builder.ToString());
+        return await _serviceClient.ExecuteGetAsync<ResponseContainer<WishlistAction>>(builder.ToString());
     }
     
-    public async Task<ResponseContainerNotifications<WishlistAction>> WishlistRemove(int bid, string accessToken)
+    public async Task<ResponseContainer<WishlistAction>> WishlistRemove(int bid, string accessToken)
     {
         var builder = new StringBuilder($"/v4/user/wishlist/delete?bid={bid}&access_token={accessToken}");
 
-        return await _serviceClient.ExecuteGetAsync<ResponseContainerNotifications<WishlistAction>>(builder.ToString());
+        return await _serviceClient.ExecuteGetAsync<ResponseContainer<WishlistAction>>(builder.ToString());
     }
     
     public async Task<ResponseContainer<UserWishlist>> UserWishlist(

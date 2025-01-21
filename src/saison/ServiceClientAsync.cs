@@ -5,11 +5,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Saison.Models.Untappd;
+using System.IO;
 using System.Linq;
 
 namespace Saison;
 
-internal class ServiceClientAsync
+public class ServiceClientAsync
 {
     private static readonly HttpClient Client = new()
     {
@@ -20,7 +21,7 @@ internal class ServiceClientAsync
 
     public ServiceClientAsync()
     {
-        Client.DefaultRequestHeaders.UserAgent.ParseAdd($"Saison/0.3 ({Config.ClientId})");
+        Client.DefaultRequestHeaders.UserAgent.ParseAdd($"Saison/0.4.1 ({Config.ClientId})");
     }
 
     internal async Task<T> ExecuteGetAsync<T>(string url)
@@ -81,19 +82,29 @@ internal class ServiceClientAsync
     private static async Task<T> ReadContentAsync<T>(HttpContent content)
     {
         await using var stream = await content.ReadAsStreamAsync();
-        stream.Position = 0;
+        var bd = await BinaryData.FromStreamAsync(stream);
 
+        try
+        {
 #pragma warning disable CS8603 // Possible null reference return.
-        return await JsonSerializer.DeserializeAsync<T>(stream, GetJsonSerializerOptions());
+            return await JsonSerializer.DeserializeAsync<T>(bd.ToStream(), GetJsonSerializerOptions());
 #pragma warning restore CS8603 // Possible null reference return.
+        }
+        catch (Exception ex)
+        {
+            await File.WriteAllBytesAsync(@"C:\Users\Константин\dev\saison_debug.json", bd.ToArray());
+            Console.WriteLine(ex);
+            throw;
+        }
     }
 
-    private static JsonSerializerOptions GetJsonSerializerOptions()
+    public static JsonSerializerOptions GetJsonSerializerOptions()
     {
         var options = new JsonSerializerOptions
         {
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
+        options.Converters.Add(new Helpers.ArrayOrObjectConverter<Notifications>());
         options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Activity.Venue>());
         options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Beer.MediaVenue>());
         options.Converters.Add(new Helpers.ArrayOrObjectConverter<Models.Brewery.MediaVenue>());
