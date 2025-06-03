@@ -4,6 +4,7 @@ on:
 	push:
 		branches:
 			- master
+			- feature/cicd
 
 jobs:
 	nuget-publish:
