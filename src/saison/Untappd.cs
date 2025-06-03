@@ -3,7 +3,7 @@ using Saison.Api;
 namespace Saison;
 
 /// <summary>
-/// Main class for using Untappd API.ф
+/// Main class for using Untappd API.
 /// </summary>
 public class Untappd
 {
