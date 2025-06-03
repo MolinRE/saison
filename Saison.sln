@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		LICENSE = LICENSE
 		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{CE500083-D4C9-4B85-8BE3-8A343131BF2A}"
+	ProjectSection(SolutionItems) = preProject
 		.github\workflows\publish.yml = .github\workflows\publish.yml
 	EndProjectSection
 EndProject
@@ -20,5 +24,8 @@ Global
 		{F897672A-EB09-4343-8EB5-F07DA1DE833F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F897672A-EB09-4343-8EB5-F07DA1DE833F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F897672A-EB09-4343-8EB5-F07DA1DE833F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CE500083-D4C9-4B85-8BE3-8A343131BF2A} = {05B04217-2AEB-4FC0-9550-60FD6388ADD4}
 	EndGlobalSection
 EndGlobal
