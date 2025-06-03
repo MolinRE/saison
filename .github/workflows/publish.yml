@@ -36,6 +36,6 @@ jobs:
       - name: Publish Saison
         run: |
           mkdir out
-          dotnet pack src/saison/Saison.csproj -c Release -o out --no-restore /p:Version=0.4.3
+          dotnet pack src/saison/Saison.csproj -c Release -o out --no-restore -p:PackageVersion=${{ env.GitVersion_NuGetVersion }}
           dotnet nuget push "./out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
           rm -rf out
