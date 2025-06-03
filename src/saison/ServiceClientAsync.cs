@@ -37,7 +37,7 @@ public class ServiceClientAsync
 
     public ServiceClientAsync()
     {
-        Client.DefaultRequestHeaders.UserAgent.ParseAdd($"Saison/0.4.1 ({Config.ClientId})");
+        Client.DefaultRequestHeaders.UserAgent.ParseAdd($"Saison/0.4.4 ({Config.ClientId})");
     }
 
     internal async Task<T> ExecuteGetAsync<T>(string url)
