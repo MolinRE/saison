@@ -14,14 +14,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v3.2.1
-        with:
-          versionSpec: '6.3.x'
-      - name: Determine Version
-        uses: gittools/actions/gitversion/execute@v3.2.1
-        with:
-          useConfigFile: true
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
@@ -36,6 +28,6 @@ jobs:
       - name: Publish Saison
         run: |
           mkdir out
-          dotnet pack src/saison/Saison.csproj -c Release -o out --no-restore -p:PackageVersion=${{ env.majorMinorPatch }}
+          dotnet pack src/saison/Saison.csproj -c Release -o out --no-restore
           dotnet nuget push "./out/*.nupkg" --skip-duplicate --no-symbols --api-key ${{secrets.NUGET_TOKEN}}
           rm -rf out
