@@ -1,12 +1,9 @@
 name: NuGet Publish
 
 on:
-	workflow_dispatch:
-		inputs:
-			publishMain:
-				description: 'Publish Saison (Y/N)?'
-				required: true
-				default: 'Y'
+	push:
+		branches:
+			- master
 
 jobs:
 	nuget-publish:
@@ -26,7 +23,6 @@ jobs:
 			  run: dotnet restore
 
 			- name: Publish Saison
-			  if: github.event.inputs.publishMain == 'Y'
 			  run: |
 				  mkdir __out
 				  dotnet pack Saison -c Release -o __out --no-restore
