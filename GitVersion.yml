@@ -1,7 +1,7 @@
 mode: ContinuousDeployment
 branches:
-  master:
-    regex: ^master$
+  main:
+    regex: ^main
     mode: ContinuousDeployment
     tag: ''
     increment: Patch
