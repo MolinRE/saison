@@ -1,41 +1,41 @@
 name: NuGet Publish
 
 on:
-	push:
-		branches:
-			- master
-			- feature/cicd
+  push:
+    branches:
+      - master
+      - feature/cicd
 
 jobs:
-	nuget-publish:
-		runs-on: ubuntu-latest
-		
-		steps:
-			- name: Checkout
-			  uses: actions/checkout@v2
-			  with:
-				  fetch-depth: 0
-			- name: Install GitVersion
-			  uses: gittools/actions/gitversion/setup@v0.10.1
-			  with:
-				  versionSpec: '5.x'
-			- name: Determine Version
-			  uses: gittools/actions/gitversion/execute@v0.10.1
-			  with:
-				  useConfigFile: true
-			- name: Setup .NET Core
-			  uses: actions/setup-dotnet@v1
-			  with:
-				  source-url: https://api.nuget.org/v3/index.json
-				  dotnet-version: 8.0.x
-			  env:
-				  NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
-			- name: Install dependencies
-			  run: dotnet restore
+  nuget-publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.10.1
+        with:
+          versionSpec: '5.x'
+      - name: Determine Version
+        uses: gittools/actions/gitversion/execute@v0.10.1
+        with:
+          useConfigFile: true
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          source-url: https://api.nuget.org/v3/index.json
+          dotnet-version: 8.0.x
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
+      - name: Install dependencies
+        run: dotnet restore
 
-			- name: Publish Saison
-			  run: |
-				  mkdir __out
-				  dotnet pack Saison -c Release -o __out --no-restore /p:Version=${{ env.GitVersion_NuGetVersion }}
-				  dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
-				  rm -rf __out
+      - name: Publish Saison
+        run: |
+          mkdir __out
+          dotnet pack Saison -c Release -o __out --no-restore /p:Version=${{ env.GitVersion_NuGetVersion }}
+          dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
+          rm -rf __out
