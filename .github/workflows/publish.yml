@@ -21,7 +21,7 @@ jobs:
       - name: Determine Version
         uses: gittools/actions/gitversion/execute@v3.2.1
         with:
-          useConfigFile: true
+          useConfigFile: false
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:

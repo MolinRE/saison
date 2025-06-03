@@ -12,4 +12,3 @@ branches:
     is-release-branch: true
     is-mainline: true
     pre-release-weight: 55000
-    tag-number-pattern: '[/-](?<number>\d+)'
