@@ -31,10 +31,11 @@ jobs:
           NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
       - name: Install dependencies
         run: dotnet restore
-
+      - name: Build
+        run: dotnet build src/saison/Saison.csproj -c Release --no-restore
       - name: Publish Saison
         run: |
-          mkdir __out
-          dotnet pack src/saison/Saison.csproj -c Release -o __out --no-restore /p:Version=${{ env.GitVersion_NuGetVersion }}
-          dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
+          mkdir out
+          dotnet pack src/saison/Saison.csproj -c Release -o out --no-restore /p:Version=${{ env.GitVersion_NuGetVersion }}
+          dotnet nuget push "./out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
           rm -rf __out

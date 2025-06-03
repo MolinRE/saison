@@ -10,7 +10,7 @@
         <Description>Saison is a wrapper for Untappd API.</Description>
         <Copyright>Konstantin Komarov, 2025</Copyright>
         <PackageProjectUrl>https://github.com/molinre/saison</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/MolinRE/saison/blob/main/LICENSE</PackageLicenseUrl>
+        <PackageLicense>https://github.com/MolinRE/saison/blob/main/LICENSE</PackageLicense>
         <RepositoryUrl>https://github.com/molinre/saison</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>untappd, beer</PackageTags>
@@ -26,6 +26,10 @@
 
     <ItemGroup>
       <PackageReference Include="System.Text.Json" Version="9.0.1" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
 </Project>
