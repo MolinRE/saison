@@ -9,7 +9,7 @@ namespace Saison.Models.Brewery
         public int TotalUserCount { get; set; }
         
         [JsonPropertyName("has_had")]
-        public int? HasHad { get; set; }
+        public bool? HasHad { get; set; }
         
         [JsonPropertyName("total_count")]
         public int TotalCount { get; set; }

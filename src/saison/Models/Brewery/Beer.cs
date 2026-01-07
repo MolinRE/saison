@@ -35,7 +35,7 @@ namespace Saison.Models.Brewery
         public string CreatedAt { get; set; }
 
         [JsonPropertyName("user_rating_score")]
-        public int UserRatingScore { get; set; }
+        public float UserRatingScore { get; set; }
 
         [JsonPropertyName("rating_score")]
         public float RatingScore { get; set; }
@@ -44,7 +44,7 @@ namespace Saison.Models.Brewery
         public int RatingCount { get; set; }
 
         [JsonPropertyName("has_had")]
-        public object HasHad { get; set; }
+        public bool? HasHad { get; set; }
 
         [JsonPropertyName("on_list")]
         public bool OnList { get; set; }
